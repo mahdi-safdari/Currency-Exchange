@@ -9,9 +9,11 @@ class ThemeSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    var switchIcon = Icon(themeProvider.isDarkMode
-        ? CupertinoIcons.sun_max_fill
-        : CupertinoIcons.moon_fill);
+    Icon switchIcon = Icon(
+      themeProvider.isDarkMode
+          ? CupertinoIcons.sun_max_fill
+          : CupertinoIcons.moon_fill,
+    );
     return IconButton(
       onPressed: () {
         themeProvider.toggleTheme();
