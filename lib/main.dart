@@ -1,3 +1,4 @@
+import 'package:exchange/providers/crypto_data_provider.dart';
 import 'package:exchange/providers/theme_provider.dart';
 import 'package:exchange/theme/my_theme.dart';
 import 'package:exchange/ui/main_wrapper.dart';
@@ -22,6 +23,9 @@ void main() {
       providers: <SingleChildWidget>[
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CryptoDataProvider(),
         ),
       ],
       child: const MyApp(),
