@@ -1,11 +1,13 @@
 import 'package:exchange/providers/theme_provider.dart';
 import 'package:exchange/theme/my_theme.dart';
+import 'package:exchange/ui/main_wrapper.dart';
 import 'package:exchange/ui/widgets/theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   //! for device orientation always portrait
@@ -39,7 +41,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Currency Exchange',
+          locale: const Locale('en'),
           localizationsDelegates: const [
+            AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -53,15 +57,7 @@ class MyApp extends StatelessWidget {
           darkTheme: MyThemes.darkTheme,
           home: Directionality(
             textDirection: TextDirection.ltr,
-            child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                actions: const <Widget>[
-                  ThemeSwitcher(),
-                ],
-                title: const Text('Exchange'),
-              ),
-            ),
+            child: MainWrapper(),
           ),
         );
       },
