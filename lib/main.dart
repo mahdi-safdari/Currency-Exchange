@@ -1,7 +1,6 @@
 import 'package:exchange/providers/theme_provider.dart';
 import 'package:exchange/theme/my_theme.dart';
 import 'package:exchange/ui/main_wrapper.dart';
-import 'package:exchange/ui/widgets/theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
