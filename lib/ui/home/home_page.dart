@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:exchange/data/models/crypto_model/crypto_data_model.dart';
 import 'package:exchange/data/repositories/response_model.dart';
 import 'package:exchange/providers/crypto_data_provider.dart';
 import 'package:exchange/ui/widgets/home_page_view.dart';
@@ -27,7 +30,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     TextTheme textTheme = Theme.of(context).textTheme;
-    final cryptoDataProvider = Provider.of<CryptoDataProvider>(context);
+    final CryptoDataProvider cryptoDataProvider =
+        Provider.of<CryptoDataProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -293,6 +297,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       case Status.COMPLETED:
+                        List<CryptoDataModel> model = cryptoDataProvider
+                            .dataFuture.data!.cryptoCurrencyList!;
                         return const Text("done.");
                       case Status.ERROR:
                         return Text(cryptoDataProvider.state.message);
