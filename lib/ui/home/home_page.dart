@@ -1,11 +1,13 @@
-import 'dart:math';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exchange/data/models/crypto_model/crypto_data_model.dart';
 import 'package:exchange/data/repositories/response_model.dart';
+import 'package:exchange/presentation/helpers/decimal_rounder.dart';
 import 'package:exchange/providers/crypto_data_provider.dart';
 import 'package:exchange/ui/widgets/home_page_view.dart';
 import 'package:exchange/ui/widgets/theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -32,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     TextTheme textTheme = Theme.of(context).textTheme;
     final CryptoDataProvider cryptoDataProvider =
         Provider.of<CryptoDataProvider>(context);
+    var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -158,6 +161,17 @@ class _HomePageState extends State<HomePage> {
                                 () {
                                   defaultChoiceIndex =
                                       value ? index : defaultChoiceIndex;
+                                  switch (index) {
+                                    case 0:
+                                      cryptoDataProvider.getTopMarketCapData();
+                                      break;
+                                    case 1:
+                                      cryptoDataProvider.getTopGainersData();
+                                      break;
+                                    case 2:
+                                      cryptoDataProvider.getTopLosersData();
+                                      break;
+                                  }
                                 },
                               );
                             },
@@ -299,7 +313,121 @@ class _HomePageState extends State<HomePage> {
                       case Status.COMPLETED:
                         List<CryptoDataModel> model = cryptoDataProvider
                             .dataFuture.data!.cryptoCurrencyList!;
-                        return const Text("done.");
+                        return ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
+                            var number = index + 1;
+                            var tokenId = model[index].id;
+
+                            MaterialColor filterColor =
+                                DecimalRounder.setColorFilter(
+                                    model[index].quotes![0].percentChange24h);
+
+                            var finalPrice = DecimalRounder.removePriceDecimals(
+                                model[index].quotes![0].price);
+
+                            //! percent change setup decimals and colors
+                            var percentChange =
+                                DecimalRounder.removePercentDecimals(
+                                    model[index].quotes![0].percentChange24h);
+
+                            Color percentColor =
+                                DecimalRounder.setPercentChangesColor(
+                                    model[index].quotes![0].percentChange24h);
+                            Icon percentIcon =
+                                DecimalRounder.setPercentChangesIcon(
+                                    model[index].quotes![0].percentChange24h);
+
+                            return SizedBox(
+                              height: height * 0.075,
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      number.toString(),
+                                      style: textTheme.bodySmall,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, right: 15),
+                                    child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            const Duration(milliseconds: 500),
+                                        height: 32,
+                                        width: 32,
+                                        imageUrl:
+                                            "https://s2.coinmarketcap.com/static/img/coins/32x32/$tokenId.png",
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) {
+                                          return const Icon(Icons.error);
+                                        }),
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          model[index].name!,
+                                          style: textTheme.bodySmall,
+                                        ),
+                                        Text(
+                                          model[index].symbol!,
+                                          style: textTheme.labelSmall,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: ColorFiltered(
+                                        colorFilter: ColorFilter.mode(
+                                            filterColor, BlendMode.srcATop),
+                                        child: SvgPicture.network(
+                                            "https://s3.coinmarketcap.com/generated/sparklines/web/1d/2781/$tokenId.svg")),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 10.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "\$$finalPrice",
+                                            style: textTheme.bodySmall,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              percentIcon,
+                                              Text(
+                                                percentChange + "%",
+                                                style: GoogleFonts.ubuntu(
+                                                    color: percentColor,
+                                                    fontSize: 13),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
                       case Status.ERROR:
                         return Text(cryptoDataProvider.state.message);
                     }

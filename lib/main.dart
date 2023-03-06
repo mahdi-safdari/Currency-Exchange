@@ -1,4 +1,5 @@
 import 'package:exchange/providers/crypto_data_provider.dart';
+import 'package:exchange/providers/market_view_provider.dart';
 import 'package:exchange/providers/theme_provider.dart';
 import 'package:exchange/theme/my_theme.dart';
 import 'package:exchange/ui/main_wrapper.dart';
@@ -26,6 +27,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => CryptoDataProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MarketViewProvider(),
         ),
       ],
       child: const MyApp(),

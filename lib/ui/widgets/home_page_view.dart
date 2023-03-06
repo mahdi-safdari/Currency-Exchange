@@ -10,10 +10,10 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   var images = [
-    'assets/images/1.jpg',
-    'assets/images/2.jpg',
-    'assets/images/3.jpg',
-    'assets/images/4.jpg',
+    'assets/images/a1.png',
+    'assets/images/a2.png',
+    'assets/images/a3.png',
+    'assets/images/a4.png',
   ];
 
   @override
