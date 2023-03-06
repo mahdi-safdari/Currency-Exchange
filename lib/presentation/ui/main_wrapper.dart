@@ -1,9 +1,9 @@
-import 'package:exchange/ui/home/home_page.dart';
-import 'package:exchange/ui/market/market_view_page.dart';
-import 'package:exchange/ui/profile/profile_page.dart';
-import 'package:exchange/ui/watch_list/watch_list_page.dart';
+import 'package:exchange/presentation/ui/home/home_page.dart';
+import 'package:exchange/presentation/ui/market/market_view_page.dart';
+import 'package:exchange/presentation/ui/profile/profile_page.dart';
+import 'package:exchange/presentation/ui/watch_list/watch_list_page.dart';
 
-import 'package:exchange/ui/widgets/bottom_nav.dart';
+import 'package:exchange/presentation/ui/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class MainWrapper extends StatelessWidget {

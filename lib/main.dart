@@ -1,10 +1,10 @@
-import 'package:exchange/providers/crypto_data_provider.dart';
-import 'package:exchange/providers/market_view_provider.dart';
-import 'package:exchange/providers/theme_provider.dart';
-import 'package:exchange/providers/user_data_provider.dart';
+import 'package:exchange/logic/providers/crypto_data_provider.dart';
+import 'package:exchange/logic/providers/market_view_provider.dart';
+import 'package:exchange/logic/providers/theme_provider.dart';
+import 'package:exchange/logic/providers/user_data_provider.dart';
 import 'package:exchange/theme/my_theme.dart';
-import 'package:exchange/ui/main_wrapper.dart';
-import 'package:exchange/ui/sign_up_screen.dart';
+import 'package:exchange/presentation/ui/main_wrapper.dart';
+import 'package:exchange/presentation/ui/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

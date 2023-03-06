@@ -1,4 +1,4 @@
-import 'package:exchange/data/api/api_provider.dart';
+import 'package:exchange/data/data_source/api_provider.dart';
 import 'package:exchange/data/models/crypto_model/all_crypto_model.dart';
 
 class CryptoDataRepository {

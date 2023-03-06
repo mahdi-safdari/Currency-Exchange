@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exchange/data/models/crypto_model/crypto_data_model.dart';
 import 'package:exchange/presentation/helpers/decimal_rounder.dart';
-import 'package:exchange/providers/market_view_provider.dart';
-import 'package:exchange/ui/widgets/shimmer_martket_widget.dart';
+import 'package:exchange/logic/providers/market_view_provider.dart';
+import 'package:exchange/presentation/ui/widgets/shimmer_martket_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../data/repositories/response_model.dart';
+import '../../../data/data_source/response_model.dart';
 
 class MarketViewPage extends StatefulWidget {
   const MarketViewPage({Key? key}) : super(key: key);

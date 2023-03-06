@@ -1,6 +1,6 @@
-import 'package:exchange/data/api/api_provider.dart';
+import 'package:exchange/data/data_source/api_provider.dart';
 import 'package:exchange/data/models/crypto_model/all_crypto_model.dart';
-import 'package:exchange/data/repositories/response_model.dart';
+import 'package:exchange/data/data_source/response_model.dart';
 import 'package:flutter/material.dart';
 
 class MarketViewProvider extends ChangeNotifier {

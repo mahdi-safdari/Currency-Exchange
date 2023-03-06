@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exchange/data/models/crypto_model/crypto_data_model.dart';
-import 'package:exchange/data/repositories/response_model.dart';
+import 'package:exchange/data/data_source/response_model.dart';
 import 'package:exchange/presentation/helpers/decimal_rounder.dart';
-import 'package:exchange/providers/crypto_data_provider.dart';
-import 'package:exchange/ui/widgets/home_page_view.dart';
-import 'package:exchange/ui/widgets/theme_switcher.dart';
+import 'package:exchange/logic/providers/crypto_data_provider.dart';
+import 'package:exchange/presentation/ui/widgets/home_page_view.dart';
+import 'package:exchange/presentation/ui/widgets/theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';

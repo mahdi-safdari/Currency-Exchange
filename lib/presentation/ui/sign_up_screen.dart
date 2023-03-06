@@ -1,6 +1,6 @@
 import 'package:exchange/data/models/user_model.dart';
-import 'package:exchange/providers/user_data_provider.dart';
-import 'package:exchange/ui/main_wrapper.dart';
+import 'package:exchange/logic/providers/user_data_provider.dart';
+import 'package:exchange/presentation/ui/main_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/repositories/response_model.dart';
+import '../../data/data_source/response_model.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -54,8 +54,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RotatedBox(
-                          quarterTurns: 3,
-                          child: Lottie.asset('assets/bitcointouch.json',
+                          quarterTurns: 4,
+                          child: Lottie.asset('assets/lf20_zw0djhar.json',
                               fit: BoxFit.fill)),
                     ],
                   ),
@@ -292,7 +292,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // const SizedBox(height: 30,),
-                Lottie.asset('assets/bitcointouch.json',
+                Lottie.asset('assets/waveloop.json',
                     height: height * 0.2,
                     width: double.infinity,
                     fit: BoxFit.fill),
