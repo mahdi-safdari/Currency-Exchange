@@ -29,12 +29,18 @@ class _HomePageState extends State<HomePage> {
     'Top Losers'
   ];
   @override
+  void dispose() {
+    super.dispose();
+    _pageViewController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     TextTheme textTheme = Theme.of(context).textTheme;
     final CryptoDataProvider cryptoDataProvider =
         Provider.of<CryptoDataProvider>(context);
-    var height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              //! Page View
+              //! Page View images
               Padding(
                 padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
                 child: SizedBox(
@@ -59,7 +65,9 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   child: Stack(
                     children: <Widget>[
+                      //! show imaage
                       HomePageView(controller: _pageViewController),
+                      //! Smooth page indicator
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
@@ -86,12 +94,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              //! marquee text
+              // # marquee text
               SizedBox(
                 height: 30,
                 width: MediaQuery.of(context).size.width - 30,
                 child: Marquee(
-                  text: '💵 Mahdi Safdari is Billionaire Dollar   ',
+                  text: '🔊 this is place for news in application ',
                   scrollAxis: Axis.horizontal,
                   style: textTheme.bodySmall,
                   startAfter: const Duration(seconds: 3),
@@ -99,11 +107,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              //! buy & sell buttons
+              // # buy & sell buttons
               Padding(
                 padding: const EdgeInsets.only(right: 5, left: 5, top: 5),
                 child: Row(
-                  children: [
+                  children: <Widget>[
+                    // # button buy
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {},
@@ -120,6 +129,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(width: 10),
+                    // # button sell
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {},
@@ -139,46 +149,44 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              //! Choice chip
+              // # Choice chip
               Padding(
                 padding: const EdgeInsets.only(right: 5, left: 8, top: 10),
                 child: Row(
                   children: <Widget>[
-                    Wrap(
-                      spacing: 8,
-                      children: List.generate(
-                        choiceList.length,
-                        (int index) {
-                          return ChoiceChip(
-                            label: Text(
-                              choiceList[index],
-                              style: textTheme.titleSmall,
-                            ),
-                            selected: defaultChoiceIndex == index,
-                            selectedColor: Colors.blue,
-                            onSelected: (bool value) {
-                              setState(
-                                () {
-                                  defaultChoiceIndex =
-                                      value ? index : defaultChoiceIndex;
-                                  switch (index) {
-                                    case 0:
-                                      cryptoDataProvider.getTopMarketCapData();
-                                      break;
-                                    case 1:
-                                      cryptoDataProvider.getTopGainersData();
-                                      break;
-                                    case 2:
-                                      cryptoDataProvider.getTopLosersData();
-                                      break;
-                                  }
-                                },
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
+                    Consumer<CryptoDataProvider>(builder: (BuildContext context,
+                        CryptoDataProvider cryptoDataProvider, Widget? child) {
+                      return Wrap(
+                        spacing: 8,
+                        children: List.generate(
+                          choiceList.length,
+                          (int index) {
+                            return ChoiceChip(
+                              label: Text(
+                                choiceList[index],
+                                style: textTheme.titleSmall,
+                              ),
+                              selected: cryptoDataProvider.defaultChoiceIndex ==
+                                  index,
+                              selectedColor: Colors.blue,
+                              onSelected: (bool value) {
+                                switch (index) {
+                                  case 0:
+                                    cryptoDataProvider.getTopMarketCapData();
+                                    break;
+                                  case 1:
+                                    cryptoDataProvider.getTopGainersData();
+                                    break;
+                                  case 2:
+                                    cryptoDataProvider.getTopLosersData();
+                                    break;
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -365,6 +373,7 @@ class _HomePageState extends State<HomePage> {
                                           return const Icon(Icons.error);
                                         }),
                                   ),
+                                  //! name
                                   Flexible(
                                     fit: FlexFit.tight,
                                     child: Column(
@@ -376,6 +385,8 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           model[index].name!,
                                           style: textTheme.bodySmall,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.fade,
                                         ),
                                         Text(
                                           model[index].symbol!,
@@ -401,7 +412,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.center,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
-                                        children: [
+                                        children: <Widget>[
                                           Text(
                                             "\$$finalPrice",
                                             style: textTheme.bodySmall,
@@ -409,13 +420,16 @@ class _HomePageState extends State<HomePage> {
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
-                                            children: [
+                                            children: <Widget>[
                                               percentIcon,
                                               Text(
-                                                percentChange + "%",
+                                                "$percentChange%",
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.ubuntu(
-                                                    color: percentColor,
-                                                    fontSize: 13),
+                                                  color: percentColor,
+                                                  fontSize: 13,
+                                                ),
                                               ),
                                             ],
                                           ),

@@ -61,16 +61,16 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const <Locale>[
-            Locale('en'), //! English
-            Locale('fa'), //! Persian
+            Locale('en'), // # English
+            Locale('fa'), // # Persian
           ],
           themeMode: themeProvider.themeMode,
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
           home: Directionality(
             textDirection: TextDirection.ltr,
-            // child: MainWrapper(),
-            child: SignUpScreen(),
+            child: MainWrapper(),
+            // # child: SignUpScreen(),
           ),
         );
       },
