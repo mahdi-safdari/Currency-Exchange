@@ -5,8 +5,8 @@ import 'Status.dart';
 // # status : {"timestamp":"2022-03-12T09:24:55.291Z","error_code":"0","error_message":"SUCCESS","elapsed":"31","credit_count":0}
 
 class AllCryptoModel {
-  Status? status;
-  Data? data;
+  final Status? status;
+  final Data? data;
 
   AllCryptoModel({this.status, this.data});
 
