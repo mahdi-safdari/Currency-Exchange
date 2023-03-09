@@ -8,7 +8,7 @@ class AllCryptoModel {
   final Status? status;
   final Data? data;
 
-  AllCryptoModel({this.status, this.data});
+  const AllCryptoModel({this.status, this.data});
 
   factory AllCryptoModel.fromJson(Map<String, dynamic> json) {
     return AllCryptoModel(
@@ -25,17 +25,13 @@ class Data {
   final List<CryptoDataModel>? cryptoCurrencyList;
   final String? totalCount;
 
-  Data({this.cryptoCurrencyList, this.totalCount});
+  const Data({this.cryptoCurrencyList, this.totalCount});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    final cryptoList = json['cryptoCurrencyList'] as List?;
-    final cryptoCurrencyList =
-        cryptoList?.map((e) => CryptoDataModel.fromJson(e)).toList();
-    final totalCount = json['totalCount'] as String?;
-
-    return Data(
-      cryptoCurrencyList: cryptoCurrencyList,
-      totalCount: totalCount,
-    );
-  }
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        cryptoCurrencyList: json['cryptoCurrencyList'] != null
+            ? List<CryptoDataModel>.from(json['cryptoCurrencyList']
+                .map((model) => CryptoDataModel.fromJson(model)))
+            : null,
+        totalCount: json['totalCount'],
+      );
 }

@@ -38,7 +38,7 @@ class CryptoDataModel {
   final String? dateAdded;
   final List<Quotes>? quotes;
   final bool? isAudited;
-  CryptoDataModel({
+  const CryptoDataModel({
     this.id,
     this.name,
     this.symbol,
@@ -127,7 +127,7 @@ class Quotes {
   final double? dominance;
   final double? turnover;
   final double? ytdPriceChangePercentage;
-  Quotes({
+  const Quotes({
     this.name,
     this.price,
     this.volume24h,

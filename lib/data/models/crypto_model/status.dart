@@ -1,8 +1,8 @@
-/// timestamp : "2022-03-12T09:24:55.291Z"
-/// error_code : "0"
-/// error_message : "SUCCESS"
-/// elapsed : "31"
-/// credit_count : 0
+// # timestamp : "2022-03-12T09:24:55.291Z"
+// # error_code : "0"
+// # error_message : "SUCCESS"
+// # elapsed : "31"
+// # credit_count : 0
 
 class Status {
   final String? timestamp;
@@ -10,7 +10,7 @@ class Status {
   final String? errorMessage;
   final String? elapsed;
   final int? creditCount;
-  Status({
+  const Status({
     this.timestamp,
     this.errorCode,
     this.errorMessage,
