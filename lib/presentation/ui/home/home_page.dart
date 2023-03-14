@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                 child: Consumer<CryptoDataProvider>(
                   builder: (BuildContext context,
                       CryptoDataProvider cryptoDataProvider, Widget? child) {
-                    switch (cryptoDataProvider.state.status) {
+                    switch (cryptoDataProvider.state!.status) {
                       case Status.LOADING:
                         //! Shimmer effect loading
                         return SizedBox(
@@ -320,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       case Status.COMPLETED:
                         List<CryptoDataModel> model = cryptoDataProvider
-                            .dataFuture.data!.cryptoCurrencyList!;
+                            .dataFuture!.data!.cryptoCurrencyList!;
                         return ListView.builder(
                           itemCount: 10,
                           itemBuilder: (BuildContext context, int index) {
@@ -443,7 +443,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         );
                       case Status.ERROR:
-                        return Text(cryptoDataProvider.state.message);
+                        return Text(cryptoDataProvider.state!.message);
                     }
                   },
                 ),

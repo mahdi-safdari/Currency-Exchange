@@ -78,7 +78,7 @@ class ApiProvider {
   }
 
   //# Sends a registration request to an API using form data.
-  dynamic callRegisterApi(name, email, password) async {
+  Future<Response> callRegisterApi(name, email, password) async {
     var formData = FormData.fromMap({
       'name': name,
       'email': email,

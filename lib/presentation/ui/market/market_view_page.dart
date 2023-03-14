@@ -70,12 +70,12 @@ class _MarketViewPageState extends State<MarketViewPage> {
             Expanded(
               child: Consumer<MarketViewProvider>(
                   builder: (context, marketViewProvider, child) {
-                switch (marketViewProvider.state.status) {
+                switch (marketViewProvider.state!.status) {
                   case Status.LOADING:
                     return const ShimmerMarketWidget();
                   case Status.COMPLETED:
                     List<CryptoDataModel>? model =
-                        marketViewProvider.dataFuture.data!.cryptoCurrencyList;
+                        marketViewProvider.dataFuture!.data!.cryptoCurrencyList;
                     return Column(
                       children: [
                         Padding(
@@ -270,7 +270,7 @@ class _MarketViewPageState extends State<MarketViewPage> {
                     );
                   case Status.ERROR:
                     return Center(
-                      child: Text(marketViewProvider.state.message),
+                      child: Text(marketViewProvider.state!.message),
                     );
                   default:
                     return const ShimmerMarketWidget();

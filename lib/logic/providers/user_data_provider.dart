@@ -1,3 +1,4 @@
+// import 'package:dio/dio.dart';
 import 'package:exchange/data/data_source/api_provider.dart';
 import 'package:exchange/data/models/user_model.dart';
 import 'package:exchange/data/data_source/response_model.dart';
@@ -8,8 +9,6 @@ class UserDataProvider extends ChangeNotifier {
 
   late dynamic dataFuture;
   ResponseModel? registerStatus;
-  var error;
-  var response;
 
   callRegisterApi(name, email, password) async {
     // start loading api
@@ -18,7 +17,7 @@ class UserDataProvider extends ChangeNotifier {
 
     try {
       // fetch data from api and goto mainWrapper
-      response = await apiProvider.callRegisterApi(name, email, password);
+      final response = await apiProvider.callRegisterApi(name, email, password);
       if (response.statusCode == 201) {
         dataFuture = UserModel.fromJson(response.data);
         registerStatus = ResponseModel.completed(dataFuture);
@@ -33,7 +32,6 @@ class UserDataProvider extends ChangeNotifier {
       // catch any error and show error
       registerStatus = ResponseModel.error("please check your connection...");
       notifyListeners();
-      print(e.toString());
     }
   }
 

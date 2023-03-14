@@ -4,29 +4,28 @@ import 'package:exchange/data/data_source/response_model.dart';
 import 'package:flutter/material.dart';
 
 class MarketViewProvider extends ChangeNotifier {
-  ApiProvider apiProvider = ApiProvider();
+  final ApiProvider apiProvider = ApiProvider();
 
-  late AllCryptoModel dataFuture;
+  AllCryptoModel? _dataFuture;
+  ResponseModel<AllCryptoModel>? _state;
 
-  late ResponseModel state;
-  var response;
+  AllCryptoModel? get dataFuture => _dataFuture;
+  ResponseModel<AllCryptoModel>? get state => _state;
 
   getCryptoData() async {
-    // start loading api
-    state = ResponseModel.loading("is loading...");
-    // notifyListeners();
+    _state = ResponseModel.loading("is loading...");
 
     try {
-      response = await apiProvider.getAllCryptoData();
+      final response = await apiProvider.getAllCryptoData();
       if (response.statusCode == 200) {
-        dataFuture = AllCryptoModel.fromJson(response.data);
-        state = ResponseModel.completed(dataFuture);
+        _dataFuture = AllCryptoModel.fromJson(response.data);
+        _state = ResponseModel.completed(dataFuture!);
       } else {
-        state = ResponseModel.error("something wrong please try again...");
+        _state = ResponseModel.error("something wrong please try again...");
       }
       notifyListeners();
     } catch (e) {
-      state = ResponseModel.error("please check your connection...");
+      _state = ResponseModel.error("please check your connection...");
       notifyListeners();
     }
   }
