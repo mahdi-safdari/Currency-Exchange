@@ -19,6 +19,7 @@ class CryptoDataProvider extends ChangeNotifier {
   ResponseModel<AllCryptoModel>? get state => _state;
   int get defaultChoiceIndex => _defaultChoiceIndex;
 
+//# Method for fetching top market cap data
   Future<void> getTopMarketCapData() async {
     _defaultChoiceIndex = 0;
     _state = ResponseModel.loading("is Loading...");
@@ -41,6 +42,7 @@ class CryptoDataProvider extends ChangeNotifier {
     }
   }
 
+//# Method for fetching top gainers data
   Future<void> getTopGainersData() async {
     _defaultChoiceIndex = 1;
     _state = ResponseModel.loading("is Loading...");
@@ -56,6 +58,7 @@ class CryptoDataProvider extends ChangeNotifier {
     }
   }
 
+//# Method for fetching top losers data
   Future<void> getTopLosersData() async {
     _defaultChoiceIndex = 2;
     _state = ResponseModel.loading("is Loading...");
